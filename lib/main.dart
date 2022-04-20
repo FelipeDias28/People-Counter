@@ -6,7 +6,7 @@ void main() {
   );
 }
 
-// Widget resposnável pelas configurações do aplicativo
+// Widget responsável pelas configurações do aplicativo
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
@@ -23,14 +23,22 @@ class MyApp extends StatelessWidget {
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
 
+  void decrement() {
+    print("Decrement");
+  }
+
+  void increment() {
+    print("Increment");
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Colors.red,
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: const [
-          Text(
+        children: [
+          const Text(
             "Pode entrar!",
             style: TextStyle(
               fontSize: 30,
@@ -38,13 +46,61 @@ class HomePage extends StatelessWidget {
               fontWeight: FontWeight.w700,
             ),
           ),
-          Text(
+          const Text(
             "0",
             style: TextStyle(
               fontSize: 100,
               color: Colors.white,
             ),
           ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              TextButton(
+                onPressed: decrement,
+                style: TextButton.styleFrom(
+                  backgroundColor: Colors.white,
+                  fixedSize:
+                      const Size(100, 100), // Define largura e altura fixa
+                  primary: Colors.black,
+                  // Deixar o botão arredondado
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(24),
+                  ),
+                ),
+                child: const Text(
+                  "Sair",
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 16,
+                  ),
+                ),
+              ),
+              const SizedBox(
+                // Widget invisível para separar os botões
+                width: 32.0,
+              ),
+              TextButton(
+                onPressed: increment,
+                style: TextButton.styleFrom(
+                  backgroundColor: Colors.white,
+                  fixedSize: const Size(100, 100),
+                  primary: Colors
+                      .black, // Dá uma tonalidade preta quando clica no botão
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(24),
+                  ),
+                ),
+                child: const Text(
+                  "Entrar",
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 16,
+                  ),
+                ),
+              ),
+            ],
+          )
         ],
       ),
     );
