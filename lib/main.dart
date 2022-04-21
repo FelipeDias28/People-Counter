@@ -6,7 +6,6 @@ void main() {
   );
 }
 
-// Widget responsável pelas configurações do aplicativo
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
@@ -19,17 +18,26 @@ class MyApp extends StatelessWidget {
   }
 }
 
-// Separando os Widgets por páginas
-// Widget responsável pela página principal do aplicativo
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  int count = 0;
+
   void decrement() {
-    print("Decrement");
+    setState(() {
+      count--;
+    });
   }
 
   void increment() {
-    print("Increment");
+    setState(() {
+      count++;
+    });
   }
 
   @override
@@ -48,16 +56,16 @@ class HomePage extends StatelessWidget {
             const Text(
               "Pode entrar!",
               style: TextStyle(
-                fontSize: 30,
+                fontSize: 60,
                 color: Colors.white,
                 fontWeight: FontWeight.w700,
               ),
             ),
-            const Padding(
-              padding: EdgeInsets.all(32.0),
+            Padding(
+              padding: const EdgeInsets.all(32.0),
               child: Text(
-                "0",
-                style: TextStyle(
+                "$count",
+                style: const TextStyle(
                   fontSize: 100,
                   color: Colors.white,
                 ),
@@ -82,7 +90,7 @@ class HomePage extends StatelessWidget {
                     "Sair",
                     style: TextStyle(
                       color: Colors.black,
-                      fontSize: 16,
+                      fontSize: 24,
                     ),
                   ),
                 ),
@@ -105,7 +113,7 @@ class HomePage extends StatelessWidget {
                     "Entrar",
                     style: TextStyle(
                       color: Colors.black,
-                      fontSize: 16,
+                      fontSize: 24,
                     ),
                   ),
                 ),
