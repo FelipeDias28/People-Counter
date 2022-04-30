@@ -40,6 +40,9 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
+  bool get isEmpty => count == 0;
+  bool get isFull => count == 3;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,9 +56,9 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text(
-              "Pode entrar!",
-              style: TextStyle(
+            Text(
+              isFull ? "Lotado!!" : "Pode entrar!",
+              style: const TextStyle(
                 fontSize: 60,
                 color: Colors.white,
                 fontWeight: FontWeight.w700,
@@ -65,9 +68,9 @@ class _HomePageState extends State<HomePage> {
               padding: const EdgeInsets.all(32.0),
               child: Text(
                 "$count",
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 100,
-                  color: Colors.white,
+                  color: isFull ? Colors.amberAccent.shade700 : Colors.white,
                 ),
               ),
             ),
@@ -75,44 +78,45 @@ class _HomePageState extends State<HomePage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 TextButton(
-                  onPressed: decrement,
+                  onPressed: isEmpty ? null : decrement,
                   style: TextButton.styleFrom(
-                    backgroundColor: Colors.white,
-                    fixedSize:
-                        const Size(100, 100), // Define largura e altura fixa
+                    backgroundColor:
+                        isEmpty ? Colors.white.withOpacity(0.4) : Colors.white,
+                    fixedSize: const Size(100, 100),
                     primary: Colors.black,
-                    // Deixar o botão arredondado
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(24),
                     ),
                   ),
-                  child: const Text(
-                    "Sair",
+                  child: Text(
+                    "Saiu",
                     style: TextStyle(
-                      color: Colors.black,
+                      color: isEmpty
+                          ? Colors.black.withOpacity(0.5)
+                          : Colors.black,
                       fontSize: 24,
                     ),
                   ),
                 ),
                 const SizedBox(
-                  // Widget invisível para separar os botões
                   width: 32.0,
                 ),
                 TextButton(
-                  onPressed: increment,
+                  onPressed: isFull ? null : increment,
                   style: TextButton.styleFrom(
-                    backgroundColor: Colors.white,
+                    backgroundColor:
+                        isFull ? Colors.white.withOpacity(0.4) : Colors.white,
                     fixedSize: const Size(100, 100),
-                    primary: Colors
-                        .black, // Dá uma tonalidade preta quando clica no botão
+                    primary: Colors.black,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(24),
                     ),
                   ),
-                  child: const Text(
-                    "Entrar",
+                  child: Text(
+                    "Entrou",
                     style: TextStyle(
-                      color: Colors.black,
+                      color:
+                          isFull ? Colors.black.withOpacity(0.5) : Colors.black,
                       fontSize: 24,
                     ),
                   ),
